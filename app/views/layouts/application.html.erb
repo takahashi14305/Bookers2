@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <script src="https://kit.fontawesome.com/f1ca8f76cd.js" crossorigin="anonymous"></script>
   <head>
     <title>Bookers2</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,21 +14,30 @@
   <body>
     <header>
     <% if user_signed_in? %>
-      <li>
-        <%= link_to "投稿フォーム", @book_path %>
-      </li>
-      <li>
-      <%= link_to 'マイページ', user_path(current_user.id) %>
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
+    <table>
+      <tr>
+      <td><%= link_to "投稿フォーム", @book_path %></td>
+      </tr>
+      <tr>
+        <td class="fa-sharp fa-solid fa-house-chimney"></td>
+        <td><%= link_to "Home", user_path(current_user.id) %></td>
+      </tr>
+      <tr>
+        <td class="fa-solid fa-users"></td>
+      　<td><%= link_to "User", users_path %></td>
+      </tr>
+      <tr>
+        <td><%= link_to "Books", books_path %></td>
+      </tr>
+      <tr>
+        <td><%= link_to "Log out", destroy_user_session_path, method: :delete %></td>
+      </tr>
     <% else %>
       <li>
-        <%= link_to "新規登録", new_user_registration_path %>
+        <%= link_to "Sign_in", new_user_registration_path %>
       </li>
       <li>
-        <%= link_to "ログイン", new_user_session_path %>
+        <%= link_to "Log_in", new_user_session_path %>
       </li>
     <% end %>
     </header>

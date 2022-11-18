@@ -1,3 +1,6 @@
+<div>
+  <%= flash[:notice] %>
+</div>
 <%= render partial: 'books/list', locals: { user: @user } %>
 <h2>Books</h2>
 <table>
@@ -13,10 +16,9 @@
 <tr>
   <td>
   <%= link_to book_path(book.id) do %>
-    <%= image_tag book.user.get_profile_image(100, 100) %>
-  <% end %>
-  </td>
+    <%= image_tag book.user.get_profile_image(100, 100) %></td>
   <td><%= book.title %></td>
+  <% end %>
   <td><%= book.body %></td>
 </tr>
 
