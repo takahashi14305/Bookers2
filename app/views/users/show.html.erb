@@ -28,10 +28,10 @@
 <tbody>
   <tr>
   <td>
-  <%= link_to book_path(book.id) do %>
+  <%= link_to user_path(current_user.id) do %>
   <%= image_tag book.user.get_profile_image(100,100) %></td>
-  <td><%= book.title %></td>
   <% end %>
+  <td><%=link_to book.title,book_path(book.id) %></td>
   <td><%= book.body %></td>
   </tr>
 </tbody>
