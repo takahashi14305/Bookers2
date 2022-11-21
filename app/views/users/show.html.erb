@@ -1,33 +1,59 @@
-<div>
-  <h2>User info</h2>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <p>name<%= @user.name %></p>
-  <p>introduction<%= @user.introduction %></p>
-  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-</div>
-<h1>New book</h1>
-<%= form_with model: Book.new do |f| %>
-  <h4>Title</h4>
-  <%= f.text_field :title %>
-
-  <h4>Opinion</h4>
-  <%= f.text_area :body %>
-
-  <%= f.submit 'Create Book' %>
+<div class="container px-5 px-sm-0">
+ <div class="row">
+  <div class="col-md-3">
+   <h2>User info</h2>
+    <table class="table">
+     <tr><%= image_tag @user.get_profile_image(100,100) %></tr>
+     <tr>
+      <th>name</th>
+      <th><%= @user.name %></th>
+     </tr>
+     <tr>
+      <th>introduction</th>
+      <th><%= @user.introduction %></th>
+     </tr>
+    </table>
+  <div class="row" style="padding-top:50px;">
+   <%= link_to edit_user_path(@user), class:"btn btn-outline-secondary btn-block" do %>
+    <i class="fas fa-user-cog"></i>
+   <% end %>
+  </div>
+ <h2 class="mt-3">New book</h2>
+ <% if @book.errors.any? %>
+  <%= book.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
 <% end %>
-<h2>Books</h2>
-<table>
+<%= form_with model: @book do |f| %>
+ <div class="form-group">
+  <label for="book_title">Title</label>
+  <input class="form-control book_title" type="text" name="book[title]" id="book_title">
+ </div>
+  <div class="form-group">
+  <label for="book_opinion">Opinion</label>
+  <textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+ </div>
+ <div class="form-group">
+   <%= f.submit 'Create Book', class: "btn btn-success" %>
+ </div>
+<% end %>
+ </div>
+<div class="col-md-8 offset-md-1">
+ <h2>Books</h2>
+ <table class="table table-hover table-inverse">
   <thead>
     <tr>
-      <th colspan="1"></th>
+      <th><colspan="1"></th>
       <th>Title</th>
       <th>Opinion</th>
     </tr>
   </thead>
 <% @books.each do |book| %>
 <tbody>
-  <tr>
-  <td>
+  <tr><td>
   <%= link_to user_path(current_user.id) do %>
   <%= image_tag book.user.get_profile_image(100,100) %></td>
   <% end %>
@@ -35,5 +61,8 @@
   <td><%= book.body %></td>
   </tr>
 </tbody>
-</table>
 <% end %>
+ </table>
+</div>
+</div>
+</div>

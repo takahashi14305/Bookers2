@@ -1,31 +1,41 @@
-<h1>User info</h1>
-<p><%= image_tag user.get_profile_image(100,100) %></p>
-<table>
-  <tr>
-    <td>name</td>
-    <td><%= user.name %></td>
-  </tr>
-  <tr>
-    <td>introduction</td>
-    <td><%= user.introduction %></td>
-  </tr>
-</table>
-<p><%= link_to "プロフィール編集", edit_user_path(user) %></p>
-<h1>New book</h1>
-<% if @book.errors.any? %>
-  <%= book.errors.count %>errors prohibited this obj from being saved:
-  <ul>
-    <% book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-<%= form_with model: @book do |f| %>
-  <h4>Title</h4>
-  <%= f.text_field :title %>
-
-  <h4>Opinion</h4>
-  <%= f.text_area :body %>
-
-  <%= f.submit 'Create Book' %>
-<% end %>
+<div class="col-md-3">
+   <h2>User info</h2>
+    <table class="table">
+      <tr><%= image_tag user.get_profile_image(100,100) %></tr>
+      <tr>
+       <th>name</th>
+       <th><%= user.name %></th>
+      </tr>
+      <tr>
+       <th>introduction</th>
+       <th><%= user.introduction %></th>
+      </tr>
+    </table>
+    <div class="row" style="padding-top:50px;">
+      <%= link_to edit_user_path(current_user.id), class:"btn btn-outline-secondary btn-block" do %>
+        <i class="fas fa-user-cog"></i>
+      <% end %>
+    </div>
+    <h2 class="mt-3">New book</h2>
+     <% if @book.errors.any? %>
+       <%= book.errors.count %>errors prohibited this obj from being saved:
+      <ul>
+       <% book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+       <% end %>
+      </ul>
+     <% end %>
+     <%= form_with model: @book do |f| %>
+      <div class="form-group">
+       <label for="book_title">Title</label>
+       <input class="form-control book_title" type="text" name="book[title]" id="book_title">
+      </div>
+      <div class="form-group">
+       <label for="book_opinion">Opinion</label>
+       <textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+      </div>
+      <div class="form-group">
+       <%= f.submit 'Create Book', class: "btn btn-success" %>
+      </div>
+     <% end %>
+</div>
